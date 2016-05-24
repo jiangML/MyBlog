@@ -8,7 +8,8 @@
 * onDraw()
 
 ####（1）声明自定义属性<br>
-在values文件夹下面创建attrs的属性文件。其中自定义属性相关知识请看 [ `自定义属性`](https://github.com/jiangML/MyBlog/blob/master/CustomAttribute.md)。
+在values文件夹下面创建attrs的属性文件。其中自定义属性相关知识请看 [ `自定义属性`](https://github.com/jiangML/MyBlog/blob/master/CustomAttribute.md)。<br>
+
 ####（2）获取自定义属性值<br>
 在自定义View复写的构造方法中获取属性值。<br>
 
@@ -19,7 +20,9 @@
 
 然后在利用a这个TypedArray实例对象获取相关属性值。
 **在用完TypedArray以后一定要调用recycle()方法释放资源。**
-####（3）onMeasure()方法
+
+####（3）onMeasure()方法<br>
+
 在这个方法里面主要是做测量view的width和height工作。<br>
 
 ```java
