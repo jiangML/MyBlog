@@ -57,7 +57,7 @@
 #### （4）onDraw()方法<br>
 在这个方法中主要是利用Canvas来画图像
 
-···java
+```java
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -73,6 +73,7 @@
                 radius, mPaint);
     }
 ```
+
 
 这里面也要考虑到view的paddingd的值。这就是继承View的自定义View的基本步骤。
 
