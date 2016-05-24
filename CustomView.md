@@ -8,7 +8,7 @@
 * onDraw()
 
 ####（1）声明自定义属性<br>
-在values文件夹下面创建attrs的属性文件。其中自定义属性相关知识请看 [ `自定义属性`](http://baidu.com)。
+在values文件夹下面创建attrs的属性文件。其中自定义属性相关知识请看 [ `自定义属性`](https://github.com/jiangML/MyBlog/blob/master/CustomAttribute.md)。
 ####（2）获取自定义属性值<br>
 在自定义View复写的构造方法中获取属性值。<br>
 
@@ -75,5 +75,92 @@
 ```
 
 
-这里面也要考虑到view的paddingd的值。这就是继承View的自定义View的基本步骤。
+这里面也要考虑到view的paddingd的值。这就是继承View的自定义View的基本步骤。<br>
+##二 继承自ViewGroup的自定义view<br>
+
+#####基本步骤如下<br>
+* 自定义属性
+* 在构造方法中获取属性
+* onMeasure()测量view
+* onLayout()布局子view
+* dispatchDraw()
+####(1) 自定义属性<br>
+这个和一中的一样就不多讲解了<br>
+####(2) 获取自定义属性<br>
+这个也和一中的一样<br>
+####(3) onMeasure()方法<br>
+这个方法中基本和一中的一样为一多的就是要测量子view的大小。<br>
+
+```java
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    	measureChildren(widthMeasureSpec, heightMeasureSpec);
+    	super.onMeasure(widthMeasureSpec, heightMeasureSpec);	
+	}
+
+```
+
+就多了一个measureChildren()方法。这个是必须的。<br>
+####(4) onLayout()
+
+改方法的原型如下：
+
+```java
+
+    //@param changed 该参数指出当前ViewGroup的尺寸或者位置是否发生了改变
+    //@param left top right bottom 当前ViewGroup相对于其父控件的坐标位置
+    protected void onLayout(boolean changed,int left, int top, int right, int bottom);
+```
+
+可以通过getMeasuredWidth()得到View的宽，getMeasuredHeight()得到View的高。getChildCount()得到子view的个数，然后根据子view的个数，宽高，对子view进行布局。调用子view的layout()方法就可以对子view布局<br>
+#####当然在布局的时候不仅仅只是考虑view的宽高，还要考虑到view的margin值的大小，margin值也是要计算进去的。<br>
+
+###例子代码如下：<br>
+
+```java
+   
+      @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+
+    int mViewGroupWidth  = getMeasuredWidth();  //当前ViewGroup的总宽度
+    int mViewGroupHeight = getMeasuredHeight(); //当前ViewGroup的总高度
+
+    int mPainterPosX = left; //当前绘图光标横坐标位置
+    int mPainterPosY = top;  //当前绘图光标纵坐标位置  
+    
+    int childCount = getChildCount();	
+    for ( int i = 0; i < childCount; i++ ) {
+  
+    View childView = getChildAt(i);
+
+    int width  = childView.getMeasuredWidth();
+    int height = childView.getMeasuredHeight();	     
+
+     CustomViewGroup.LayoutParams margins = (CustomViewGroup.LayoutParams)(childView.getLayoutParams());
+  
+    //如果剩余的空间不够，则移到下一行开始位置
+    if( mPainterPosX + width + margins.leftMargin + margins.rightMargin > mViewGroupWidth ) {	       
+        mPainterPosX = left; 
+        mPainterPosY += height + margins.topMargin + margins.bottomMargin;
+      }		    
+  
+    //执行ChildView的绘制
+    childView.layout(mPainterPosX+margins.leftMargin, mPainterPosY+margins.topMargin,mPainterPosX+margins.leftMargin+width, mPainterPosY+margins.topMargin+height);
+  
+      mPainterPosX += width + margins.leftMargin + margins.rightMargin;
+    }       
+
+
+```
+
+
+
+
+
+
+
+
+
+
 
