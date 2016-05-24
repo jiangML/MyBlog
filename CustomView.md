@@ -87,6 +87,7 @@
 * onMeasure()测量view
 * onLayout()布局子view
 * dispatchDraw()
+
 ####(1) 自定义属性<br>
 这个和一中的一样就不多讲解了<br>
 ####(2) 获取自定义属性<br>
@@ -156,6 +157,10 @@
 
 
 ```
+
+####(5)dispatchDraw()<br>
+这个方法一般可以不用复写。可以不去实现。
+
 
 
 
