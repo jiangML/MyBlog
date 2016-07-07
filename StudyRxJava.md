@@ -2,7 +2,8 @@
 #####现在android开发流行使用RxJava+Retrofit+mvp模式开始，所以我也在不断的学习RxJava中。在使用过程中，觉得RxJava的确很不错。解决了回调嵌套问题。特别是提供了很多操作符的使用。其实要想学习好RxJava主要就是先了解其实现思想，主要就是利用观察者来实现。然后就是要学习好RxJava的一系列操作符。
 
 ##一 利用RxJava实现EventBus 事件总线 RxBus
-··· java
+
+``` java
 
     public class RxBus {
 
@@ -59,7 +60,7 @@
 
 使用如下
 
-··· java
+```java
 
 
      RxBus.getDefaultInstance().post("你好！");
@@ -79,7 +80,6 @@
                    ULog.i(TAG, throwable.getMessage());
                }
            });
-
 
 ```
 
