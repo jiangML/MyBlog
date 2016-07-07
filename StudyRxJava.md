@@ -54,10 +54,11 @@
 
     }
 ```
-
+<br>
 使用如下
 
 ··· java
+
 
      RxBus.getDefaultInstance().post("你好！");
 
