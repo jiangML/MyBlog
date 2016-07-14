@@ -84,3 +84,9 @@
 ```
 
 其中我在调用toObservable()方法后还调用了observOn()方法，指定在main线程运行，这个地方为什么要调用呢？因为RxBus的post()方法不确定是在哪个线程调用，当post()方法在main线程调用的时候toObservable()方法也在main线程执行。如果post()方法在子线程调用的时候toObservable()方法也就在子线执行。所以简单来说就是post()方法在什么线程调用，那么toObservable()方法也就在什么线程调用。在我的代码中因为我在toObservable()的subscribe()的Action的call()方法中有对ui的操作，所以我在这里指定了在main线程执行。
+
+
+###二RxJava的操作符
+####(1)创建observablec创建事件流
+####(2)过滤事件 
+
